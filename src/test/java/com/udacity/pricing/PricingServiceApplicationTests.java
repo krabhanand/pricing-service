@@ -38,4 +38,11 @@ public class PricingServiceApplicationTests {
 		assertThat(response.getStatusCode(),equalTo(HttpStatus.OK));
 	}
 
-}
+	@Test
+	public void testPriceOutsideLimit() {
+		ResponseEntity<Price> response =
+				this.restTemplate.getForEntity("http://localhost:" + port + "/services/price?vehicleId=21", Price.class);
+
+		assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
+	}
+	}
